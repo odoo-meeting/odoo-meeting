@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="meeting_formroom_form_view">
+            <field name="name">FormRoom</field>
+            <field name="model">meeting.formroom</field>
+            <field name="arch" type="xml">
+                <form string="Room">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record model="ir.ui.view" id="meeting_tree_view">
+            <field name="name">TreeFormRoom</field>
+            <field name="model">meeting.formroom</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+         <record model="ir.actions.act_window" id="meeting_formroom_list_action">
+            <field name="name">FormRoom</field>
+            <field name="res_model">meeting.formroom</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="session_menu" name="Room"
+                  parent="openacademy_menu"
+                  action="meeting_formroom_list_action"/>
+
+
+
+    </data>
+</openerp>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="meeting_room1_form_view">
+            <field name="name">FormCreate</field>
+            <field name="model">meeting.room1</field>
+            <field name="arch" type="xml">
+                <form string="Meeting Room">
+                     <header>
+                         <button name="draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed"/>
+                         <button name="confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight" />
+                         <button name="done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                         <button name="cancel" type="object"
+                                string="Cancel Meeting" states="done"/>
+                         <field name="state" widget="statusbar" />
+                    </header>
+
+                <sheet>
+                    <group>
+                        <h1>
+                            Meeting Number<field name="id" nolabel="1"></field>
+                        </h1>
+                    </group>
+                    <center>
+                            <group string="Meeting Room Access">
+                                <group>
+                                    <field name="subject" attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="name_id" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="number_room" option="NoCreate"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                                <group>
+                                    <field name="start_date"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                    <field name="end_date"  attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                </group>
+                            </group>
+
+                            <group>
+                               <field name="name_ids"  attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                   <tree>
+                                       <field name="name"/>
+                                       <field name="login"/>
+                                       <field name="phone"/>
+                                   </tree>
+                               </field>
+                            </group>
+                    </center>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="meeting_calendar_view">
+            <field name="name">TreeViewCalendar</field>
+            <field name="model">meeting.room1</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar"
+                          date_start="start_date"
+                          date_stop="end_date"
+                          color="state">
+                    <field name="name_id"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="meeting_room1_tree_view">
+            <field name="name">TreeViewFormMeeting</field>
+            <field name="model">meeting.room1</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="subject"/>
+                    <field name="name_id"/>
+                    <field name="number_room"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
+
